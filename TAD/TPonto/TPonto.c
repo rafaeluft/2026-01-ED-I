@@ -27,3 +27,10 @@ void TPonto_print(TPonto* ponto){
         printf("(%0.2f, %0.2f)", ponto->x, ponto->y);
     }
 }
+/**
+ * Acessa a coordenada x do Ponto e 
+ * copia para a variável passada por parâmetro (via ponteiro)
+ */
+void TPonto_get_x(TPonto* ponto, float* px){
+//Todo...
+}

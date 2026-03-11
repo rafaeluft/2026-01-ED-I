@@ -18,7 +18,10 @@ TPonto* TPonto_create(float, float);
  * Imprime um TPonto preenchido.
  */
 void TPonto_print(TPonto*);
-
-
+/**
+ * Acessa a coordenada x do Ponto e 
+ * copia para a variável passada por parâmetro (via ponteiro)
+ */
+void TPonto_get_x(TPonto*, float*);
 
 #endif
