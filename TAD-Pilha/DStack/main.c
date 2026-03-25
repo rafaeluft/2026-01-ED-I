@@ -15,6 +15,6 @@ int main(){
     while(Stack_pop(pilha1, &temp)){
         printf("%d\n", temp);
     }
-
+    Stack_destroy(pilha1);
     return 0;
 }
