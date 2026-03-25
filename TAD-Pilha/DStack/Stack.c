@@ -79,7 +79,27 @@ bool Stack_head(Stack* pilha, int* pinfo){
  * Desaloca os recursos da pilha;
  * @param Stack* instância de uma pilha
  */
-void Stack_destroy(Stack*);
+void Stack_destroy(Stack* pilha){
+    //Com a pop
+    int temp;
+    while(Stack_pop(pilha, &temp))
+    ;
+    free(pilha);
+}
+/**
+ * Desaloca os recursos da pilha;
+ * @param Stack* instância de uma pilha
+ */
+void Stack_destroy_sem_pop(Stack* pilha){
+    //sem a pop
+    TNo* aux;
+    while(pilha->topo != NULL){
+        aux = pilha->topo;
+        pilha->topo = pilha->topo->prox;
+        free(aux);
+    }
+    free(pilha);
+}
 
 //Auxiliares
 /**
