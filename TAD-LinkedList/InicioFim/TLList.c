@@ -41,6 +41,11 @@ bool TLList_insert_begin(TLList* lista, int info){
     lista->inicio = novo;
     return true;
 }
+bool TLList_insert_end(TLList* lista, int info){
+    //TODO: Implementar a função que insere no fim da lista
+    puts("Funcao nao implementada...");
+    return false;
+}
 /**
  * Imprime a lista do início para o fim.
  */

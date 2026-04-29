@@ -13,6 +13,12 @@ TLList* TLList_create();
  */
 bool TLList_insert_begin(TLList*, int);
 /**
+ * Política de inserção no fim da lista;
+ * @return true|false caso não possa inserir na lista
+ */
+bool TLList_insert_end(TLList*, int);
+
+/**
  * Imprime a lista do início para o fim.
  */
 void TLList_print(TLList*);
