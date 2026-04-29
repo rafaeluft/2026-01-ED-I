@@ -43,8 +43,23 @@ bool TLList_insert_begin(TLList* lista, int info){
 }
 bool TLList_insert_end(TLList* lista, int info){
     //TODO: Implementar a função que insere no fim da lista
-    puts("Funcao nao implementada...");
-    return false;
+       TNo* novo = malloc(sizeof(TNo));
+    //Se for NULL, nao conseguimos memória
+    if(novo == NULL) 
+        return false; 
+    //Iniciando o campo info do no com o info do parametro da funcao
+    novo->info = info;
+    novo->prox = NULL;
+    if(lista->inicio == NULL)
+        lista->inicio = novo;
+    else{//a lista nao estah vazia
+        TNo* aux = lista->inicio;
+        while(aux->prox != NULL)
+            aux = aux->prox;
+        //Aux é o ultimo elemento da lista
+        aux->prox = novo;
+    }
+    return true;
 }
 /**
  * Imprime a lista do início para o fim.
