@@ -17,21 +17,38 @@ TNo* TNo_createNFill(int info){
 }
 
 TLList* TLList_create(){
-    //TODO: implementar a create
-    return NULL;
+    TLList* nova = malloc(sizeof(TLList));
+    if(nova != NULL){
+        nova->inicio = NULL;
+    }
+    return nova;
 }
 /**
  * Política de inserção no início da lista;
  * @return true|false caso não possa inserir na lista
  */
 bool TLList_insert_begin(TLList* lista, int info){
-//TODO: Implementar a função de inserção no inicio
-return false;
+    //Inicializando um TNo novo para a nova informação
+    TNo* novo = malloc(sizeof(TNo));
+    //Se for NULL, nao conseguimos memória
+    if(novo == NULL) 
+        return false; 
+    //Iniciando o campo info do no com o info do parametro da funcao
+    novo->info = info;
+    //Fazendo a ligação do novo no com o inicio da lista (se for null, o prox sera null, apenas nesta ocasiao)
+    novo->prox = lista->inicio;	
+    //Atualizando o inicio para o novo nó recém inserido
+    lista->inicio = novo;
+    return true;
 }
 /**
  * Imprime a lista do início para o fim.
  */
 void TLList_print(TLList* lista){
-//TODO: Implementar a print
-puts("A função print nao está implementada ainda!");
+    TNo* aux = lista->inicio;
+    while(aux!=NULL){
+        printf("%d->", aux->info);
+        aux = aux->prox;
+    }
+    putchar('\n');
 }
