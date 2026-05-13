@@ -18,4 +18,22 @@ bool TLList_insert(TLList*, int);
  */
 void TLList_print(TLList*);
 
+/**
+ * Concatena duas listas em uma terceira usando
+ * as funções do TAD.
+ * @param TLList* lista1
+ * @param TLList* lista2
+ * @return TLList* lista3 com o resultado da concatenação
+ */
+TLList* TLList_conca_func_tad(TLList*, TLList*);
+
+/**
+ * Concatena duas listas em uma terceira usando
+ * as funções do TAD.
+ * @param TLList* lista1
+ * @param TLList* lista2
+ * @return TLList* lista3 com o resultado da concatenação
+ */
+TLList* TLList_conca_sem_tad(TLList*, TLList*);
+
 #endif

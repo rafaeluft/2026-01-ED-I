@@ -55,3 +55,26 @@ void TLList_print(TLList* lista){
     }
     putchar('\n');
 }
+
+TLList* TLList_conca_func_tad(TLList* lista1, TLList* lista2){
+    TLList* lista3=TLList_create();
+    TNo* aux = lista1->inicio;
+    while(aux!=NULL){
+        TLList_insert(lista3, aux->info);
+        aux = aux->prox;
+    }
+    aux = lista2->inicio;
+    while(aux!=NULL){
+        TLList_insert(lista3, aux->info);
+        aux = aux->prox;
+    }
+    return lista3;
+}
+
+TLList* TLList_conca_sem_tad(TLList* lista1, TLList* lista2){
+    //Nao pode usar nenhuma funcao do tad
+    //malloc 
+    //Inserção na mao
+    //etc
+    return NULL;
+}
