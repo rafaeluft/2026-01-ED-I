@@ -31,7 +31,7 @@ TCList* TCList_create(){
 }
 //TODO: Modifique as funções para funcionar como uma lista circular
 /**
- * Política de inserção no início da lista;
+ * Política de inserção no fim da lista;
  * @return true|false caso não possa inserir na lista
  */
 bool TCList_insert(TCList* lista, int info){
