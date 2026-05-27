@@ -29,7 +29,6 @@ TCList* TCList_create(){
     }
     return nova;
 }
-//TODO: Modifique as funções para funcionar como uma lista circular
 /**
  * Política de inserção no fim da lista;
  * @return true|false caso não possa inserir na lista
@@ -39,21 +38,28 @@ bool TCList_insert(TCList* lista, int info){
     TNo* novo = TNo_createNFill(info);
     if(novo == NULL) 
         return false; 
-    TNo** aux = &(lista->inicio);
-    while(*aux!=NULL)
-        aux = &(*aux)->prox;
-    *aux = novo;
+    if(lista->inicio == NULL)
+        lista->inicio = novo;
+    else{
+        TNo *aux = lista->inicio;
+        //Quem eh o ultimo?
+        while(aux->prox != lista->inicio)
+            aux = aux->prox;
+        //Aux eh o ultimo elemento da lista
+        aux->prox = novo;
+    }
+    novo->prox = lista->inicio;
     return true;
 }
-//TODO: Modifique as funções para funcionar como uma lista circular
 /**
  * Imprime a lista do início para o fim.
  */
 void TCList_print(TCList* lista){
     TNo* aux = lista->inicio;
-    while(aux!=NULL){
-        printf("%d->", aux->info);
-        aux = aux->prox;
-    }
+    if(aux!=NULL)
+        do{
+            printf("%d->", aux->info);
+            aux = aux->prox;
+        }while(aux!=lista->inicio);
     putchar('\n');
 }
