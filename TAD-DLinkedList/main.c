@@ -6,7 +6,7 @@ int main(){
     int V[] = {1, 2, 3, 4, 5}, i;
     
     for(i = 0; i<5; i++)
-        if(!TDList_insert(lista1, V[i]))
+        if(!TDList_insert_end(lista1, V[i]))
             printf("Ocorreu um erro ao inserir o V[%i]=%i\n", i, V[i]);
 
     TDList_print(lista1);
