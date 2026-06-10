@@ -12,7 +12,7 @@ typedef struct _no{
 struct _list{
     TNo* inicio;
     char policy;//Política de inserção
-    void (*ptr_func)(void*);
+    void (*ptr_func)(const void*);
     unsigned int obj_size; //Tamanho do objeto(em bytes)
     //A função de comparação
     int (*cmp_func)(const void*, const void*);
@@ -41,7 +41,8 @@ TNo* TNo_createNFill(void* info, unsigned int obj_size){
 bool TGList_insert_begin(TGList* lista, void* info);
 bool TGList_insert_end(TGList* lista, void* info);
 bool TGList_insert_ordenado(TGList*, void* info);
-TGList* TGList_create(char policy, void (*ptr_func)(void*), unsigned int obj_size, int (*cmp_func)(const void*, const void*)){
+
+TGList* TGList_create(char policy, void (*ptr_func)(const void*), unsigned int obj_size, int (*cmp_func)(const void*, const void*)){
     //if(policy) posso testar se os valores estão de acordo...
     TGList* nova = malloc(sizeof(TGList));
     if(nova != NULL){
@@ -56,9 +57,9 @@ TGList* TGList_create(char policy, void (*ptr_func)(void*), unsigned int obj_siz
 bool TGList_insert(TGList* lista, void* info){
 
     switch(lista->policy){
-        case NO_INICIO: return TGList_insert_begin(lista, info);
-        case NO_FIM: return TGList_insert_end(lista, info);
-        case ORDENADA: return TGList_insert_ordenado(lista, info);
+        case NO_INICIO: return TGList_insert_begin(lista, info); break;
+        case NO_FIM: return TGList_insert_end(lista, info); break;
+        case ORDENADA: return TGList_insert_ordenado(lista, info); break;
     }
     return false;
 }
@@ -83,8 +84,9 @@ bool TGList_insert_end(TGList* lista, void* info){
     //Se for NULL, nao conseguimos memória
     if(novo == NULL) 
         return false; 
-    if(lista->inicio == NULL)
+    if(lista->inicio == NULL){
         lista->inicio = novo;
+    }
     else{//a lista nao estah vazia
         TNo* aux = lista->inicio;
         while(aux->prox != NULL)
@@ -95,21 +97,32 @@ bool TGList_insert_end(TGList* lista, void* info){
     return true;
 }
 /** Faz a inserção ordenada da lista */
-bool TGList_insert_end(TGList* lista, void* info){
+bool TGList_insert_ordenado(TGList* lista, void* info){
     TNo* novo = TNo_createNFill(info, lista->obj_size);
     //Se for NULL, nao conseguimos memória
     if(novo == NULL) 
         return false; 
-    if(lista->inicio == NULL)
+    if(lista->inicio == NULL){
         lista->inicio = novo;
+    }
     else{//a lista nao estah vazia
         //if o novo elemento é menor do que o início
         if(lista->cmp_func(lista->inicio->info, info) < 0)
         {
-            //Lógica do insert begin
+            printf("Inseri um menor do que o inicio!;");
+            novo->prox = lista->inicio;
+            lista->inicio = novo;
         }else{
-            //Procurar o local correto para inserir
-            
+            TNo* aux = lista->inicio;
+            while(aux->prox){
+                if(lista->cmp_func(aux->prox->info, info) < 0)
+                    break;
+                aux = aux->prox;
+            }
+            //Eu parei pq cheguei a null (ultimo elemento)
+            //ou eu parei pq cheguei num elemento tal que o prox->info > info
+            novo->prox = aux->prox;
+            aux->prox = novo;
         }
     }
     return true;
